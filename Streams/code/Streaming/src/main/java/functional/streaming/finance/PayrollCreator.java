@@ -56,9 +56,7 @@ public class PayrollCreator {
             ));
 
         List<CurrencyAmount> result = new ArrayList<>();
-        for (Map.Entry<Currency, Integer> entry : sumByCurrency.entrySet()) {
-            result.add(new CurrencyAmount(entry.getValue(), entry.getKey()));
-        }
+        sumByCurrency.forEach((key, value) -> result.add(new CurrencyAmount(value, key)));
         return result;
     }
 

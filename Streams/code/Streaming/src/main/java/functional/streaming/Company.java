@@ -4,6 +4,7 @@ import functional.streaming.finance.CurrencyAmount;
 import functional.streaming.finance.Payment;
 import functional.streaming.finance.PaymentsPerYear;
 import functional.streaming.humanresource.Employee;
+import functional.streaming.humanresource.Person;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * This class models a Company with all its Employees.
@@ -39,20 +41,14 @@ public class Company {
      * Aufgabe a1)
      */
     public List<String> getDistinctFirstnamesOfEmployees() {
-        List<String> distinctFirstName = new ArrayList<>();
-        getAllEmployees().stream().distinct().forEach((x) -> distinctFirstName.add(x.getFirstName()));
-        return distinctFirstName;
+        return getAllEmployees().stream().map(Person::getFirstName).distinct().collect(Collectors.toList());
     }
 
     /*
      * Aufgabe a2)
      */
     public String[] getDistinctLastnamesOfEmployees() {
-        String[] distinctLastName = {};
-        List<String> tempLastName = new ArrayList<>();
-        employeeList.forEach((x) -> tempLastName.add(x.getLastName()));
-        distinctLastName = (String[]) tempLastName.stream().distinct().toArray();
-        return distinctLastName;
+        return getAllEmployees().stream().map(Person::getLastName).distinct().toArray(String[]::new);
     }
 
     /*
